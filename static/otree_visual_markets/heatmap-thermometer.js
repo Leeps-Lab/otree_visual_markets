@@ -1,11 +1,10 @@
 import { html, PolymerElement } from '/static/otree-redwood/node_modules/@polymer/polymer/polymer-element.js';
-import { remap, clamp, lerp } from './utils.js';
+import { remap, getGradientColor } from './utils.js';
 
 class HeatmapThermometer extends PolymerElement {
 
     static get properties() {
         return {
-            colorScheme:  Array,
             maxUtility: Number,
             currentUtility: Number,
             hoverUtility: Number,
@@ -92,16 +91,6 @@ class HeatmapThermometer extends PolymerElement {
         });
     }
 
-    getGradientColor(percent) {
-        percent = clamp(percent, 0, 1);
-        const scheme = this.colorScheme;
-        percent = percent * (scheme.length - 1)
-        const low_index = Math.floor(percent)
-        const high_index = Math.ceil(percent)
-        percent = percent - low_index
-        return [0, 1, 2].map(i => lerp(scheme[low_index][i], scheme[high_index][i], percent));
-    }
-
     drawGradient(width, height) {
         // if any arguments are undefined, just return
         if (Array.from(arguments).some(e => typeof e === 'undefined')) return;
@@ -112,7 +101,7 @@ class HeatmapThermometer extends PolymerElement {
         const data = imageData.data;
 
         for (let col = 0; col < width; col++) {
-            const color = this.getGradientColor(col/width);
+            const color = getGradientColor(col/width);
             for (let row = 0; row < height; row++) {
                 const index = (row * width * 4) + (col * 4);
                 data[index    ] = color[0];

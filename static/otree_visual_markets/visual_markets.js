@@ -251,8 +251,8 @@ class VisualMarkets extends PolymerElement {
                                 <heatmap-element
                                     id="heatmap"
                                     utility-function="[[ utilityFunction ]]"
-                                    x-bounds="[[ xBounds ]]"
-                                    y-bounds="[[ yBounds ]]"
+                                    max-x-bounds="[[ xBounds ]]"
+                                    max-y-bounds="[[ yBounds ]]"
                                     current-x="[[ currentX ]]"
                                     current-y="[[ currentY ]]"
                                     current-bid="[[ currentBid ]]"

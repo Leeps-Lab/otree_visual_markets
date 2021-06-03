@@ -3,7 +3,7 @@ import '/static/otree-redwood/src/otree-constants/otree-constants.js';
 import './lib/marchingsquares.js';
 import './heatmap-thermometer.js';
 import './currency_scaler.js';
-import { remap, clamp, lerp } from './utils.js';
+import { remap, clamp, lerp, getGradientColor } from './utils.js';
 
 // radius of all circles representing bundles (current bundle, proposed bundle, current orders etc.)
 const BUNDLE_CIRCLE_RADIUS = 7;
@@ -85,7 +85,6 @@ class HeatmapElement extends PolymerElement {
             
             <div class="thermometer-container">
                 <heatmap-thermometer
-                    color-scheme="[[ colorScheme ]]"
                     max-utility="[[ maxUtility ]]"
                     current-utility="[[ currentUtility ]]"
                     hover-utility="[[ hoverUtility ]]"
@@ -95,7 +94,7 @@ class HeatmapElement extends PolymerElement {
             <div class="square-aspect">
                 <div class="main_container">
                     <canvas id="y_scale"></canvas>
-                    <div id="heatmap_container" on-mousemove="hover" on-mouseout="mouseout" on-click="click">
+                    <div id="heatmap_container" on-mousemove="hover" on-mouseout="mouseout" on-click="click" on-wheel="scroll">
                         <!-- use stacked canvases as 'layers' so we can clear different elements individually -->
                         <canvas id="heatmap_canvas"></canvas>
                         <canvas id="hover_curve_canvas"></canvas>
@@ -112,21 +111,13 @@ class HeatmapElement extends PolymerElement {
 
     static get properties() {
         return {
-            colorScheme: {
-                type: Array,
-                value: () => [
-                    [0, 0, 200],
-                    [60, 200, 80],
-                    [220, 220, 30],
-                    [220, 190, 100],
-                    [255, 0, 0],
-                ],
-            },
             utilityFunction: {
                 type: Object,
             },
             proposedX: Number,
             proposedY: Number,
+            maxXBounds: Array,
+            maxYBounds: Array,
             xBounds: Array,
             yBounds: Array,
             currentX: Number,
@@ -154,7 +145,7 @@ class HeatmapElement extends PolymerElement {
             },
             quadTree: {
                 type: Object,
-                computed: 'computeQuadTree(utilityFunction, xBounds, yBounds, width, height)',
+                computed: 'computeQuadTree(utilityFunction, maxXBounds, maxYBounds, width, height)',
             }
         }
     }
@@ -181,6 +172,9 @@ class HeatmapElement extends PolymerElement {
             this.setSize(width, height);
         });
         resizeObserver.observe(this.$.heatmap_container);
+
+        this.xBounds = this.maxXBounds;
+        this.yBounds = this.maxYBounds;
     }
 
     setSize(width, height) {
@@ -311,6 +305,31 @@ class HeatmapElement extends PolymerElement {
             bubbles: true,
             composed: true
         }));
+    }
+
+    scroll(e) {
+        e.preventDefault();
+        const xWidth = this.xBounds[1] - this.xBounds[0];
+        const xCenter = this.xBounds[0] + xWidth / 2;
+        const yWidth = this.yBounds[1] - this.yBounds[0];
+        const yCenter = this.yBounds[0] + yWidth / 2;
+
+        const zoomSpeed = 0.01;
+        const scale = 1 + zoomSpeed * e.deltaY;
+
+        const newXWidth = xWidth * scale;
+        const newYWidth = yWidth * scale;
+
+        this.setProperties({
+            xBounds: [
+                xCenter - newXWidth/2,
+                xCenter + newXWidth/2,
+            ],
+            yBounds: [
+                yCenter - newYWidth/2,
+                yCenter + newYWidth/2,
+            ],
+        })
     }
 
     /*
@@ -629,23 +648,6 @@ class HeatmapElement extends PolymerElement {
     }
 
     /**
-     * gets colors from the gradient defined by this.colorScheme
-     * 0.0 <= percent <= 1.0
-     * where percent = 1.0 gets the last color in color_stops and percent = 0.0 gets the first color in color_stops
-     *
-     * @param {*} percent value to get from gradient
-     */
-    getGradientColor(percent) {
-        percent = clamp(percent, 0, 1);
-        const scheme = this.colorScheme;
-        percent = percent * (scheme.length - 1)
-        const low_index = Math.floor(percent)
-        const high_index = Math.ceil(percent)
-        percent = percent - low_index
-        return [0, 1, 2].map(i => lerp(scheme[low_index][i], scheme[high_index][i], percent));
-    }
-
-    /**
      * Generate the heatmap
      */
     drawHeatmap(utilityFunction, usePartialEquilibrium, xBounds, yBounds, maxUtility, width, height) {
@@ -656,24 +658,27 @@ class HeatmapElement extends PolymerElement {
 
         const imageData = ctx.createImageData(width, height);
         const data = imageData.data;
+        const start = performance.now();
         // iterate through every pixel in the image in row major order
         for (let row = 0; row < height; row++) {
             for (let col = 0; col < width; col++) {
                 const x = remap(col, 0, width, xBounds[0], xBounds[1]);
                 const y = remap(row, 0, height, yBounds[1], yBounds[0]);
+
                 const utility = utilityFunction(x, y);
                 var percent = utility / maxUtility;
 
-                const color = this.getGradientColor(percent);
+                const [r, g, b] = getGradientColor(percent);
 
                 const index = (row * width * 4) + (col * 4);
-                data[index    ] = color[0];
-                data[index + 1] = color[1];
-                data[index + 2] = color[2];
+                data[index    ] = r;
+                data[index + 1] = g;
+                data[index + 2] = b;
                 // set alpha channel to fully opaque
                 data[index + 3] = 255
             }
         }
+        console.log('loop', performance.now() - start);
 
         // Display heatmap
         ctx.putImageData(imageData, 0, 0);
@@ -723,6 +728,7 @@ class HeatmapElement extends PolymerElement {
         const height = this.$.x_scale.height;
 
         const ctx = this.$.x_scale.getContext('2d');
+        ctx.clearRect(0, 0, width, height);
         ctx.textBaseline = 'top'
         ctx.font = '15px sans-serif';
         ctx.beginPath();
@@ -753,6 +759,7 @@ class HeatmapElement extends PolymerElement {
         const height = this.$.y_scale.height;
 
         const ctx = this.$.y_scale.getContext('2d');
+        ctx.clearRect(0, 0, width, height);
         ctx.textAlign = 'right';
         ctx.font = '15px sans-serif';
         ctx.beginPath();

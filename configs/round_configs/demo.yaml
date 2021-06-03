@@ -10,14 +10,14 @@ x_endowment: 20
 # scaling for x asset
 x_currency_scale: 10
 # heatmap bounds for x asset
-x_bounds: [0, 10]
+x_bounds: [0, 100]
 
 # starting y (cash) endowment for each player
 y_endowment: 20
 # scaling for y asset
 y_currency_scale: 1000
 # heatmap bounds for y asset
-y_bounds: [0, 10]
+y_bounds: [0, 100]
 
 utility_function: "(x ** 0.5) * (y ** 0.5)"
 max_utility: 50
@@ -28,7 +28,7 @@ period_length: null
 post_round_delay: 30
 
 # whether to draw the heatmap
-heatmap_enabled: false
+heatmap_enabled: true
 
 # utility grid x and y bounds. These will be the bounds if the heatmap_enabled is false
 x_bounds_grid: [0,10]
