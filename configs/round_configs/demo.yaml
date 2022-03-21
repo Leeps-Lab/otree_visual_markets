@@ -24,6 +24,9 @@ trade_box_scale: 0.2
 # this function needs to be both valid javascript and python code which means available operations are
 # pretty much just limited to arithmetic
 
+# if the parameter 'piecewise_utility' is True, the syntax should be a string like this one
+#"(piece 1, domain for piece 1);(piece 2, domain for piece 2)...". e.g: “(11 + 12*(x+(11.2*y - 0.5*(y**2))), y<11.2);(11 + 12*(x + 0.5*(11.2**2)), y>=11.2)”
+# else, the syntax is a string with the "function". e.g: "(x ** 0.5) * (y ** 0.5)"
 piecewise_utility: true
 utility_function: “(11 + 12*(x+(11.2*y - 0.5*(y**2))), y<11.2);(11 + 12*(x + 0.5*(11.2**2)), y>=11.2)”
 # the maximum utility value which can be reached by a player

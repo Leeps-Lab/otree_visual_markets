@@ -135,6 +135,13 @@ class Player(markets_models.Player):
         return MarketConfig.get(config_name, self.round_number, self.id_in_group)
     
     def utility_function(self, x, y):
+        """
+        Evaluates the inputted parameters on a continuous/piecewise function
+
+        Input: parameter values for x and y (float)
+        Output: value of function after evaluating the values (float)
+        """
+
         if not self.config.piecewise_utility:
             return eval(self.config.utility_function, {'x': x, 'y': y})
         else:
