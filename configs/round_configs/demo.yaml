@@ -23,7 +23,9 @@ trade_box_scale: 0.2
 # this calculation is done after scaling, so x and y are fractional values
 # this function needs to be both valid javascript and python code which means available operations are
 # pretty much just limited to arithmetic
-utility_function: "(x ** 0.5) * (y ** 0.5)"
+
+piecewise_utility: true
+utility_function: “(11 + 12*(x+(11.2*y - 0.5*(y**2))), y<11.2);(11 + 12*(x + 0.5*(11.2**2)), y>=11.2)”
 # the maximum utility value which can be reached by a player
 # this is used to scale displayed utility values when generating the heatmap
 max_utility: 50

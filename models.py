@@ -135,7 +135,20 @@ class Player(markets_models.Player):
         return MarketConfig.get(config_name, self.round_number, self.id_in_group)
     
     def utility_function(self, x, y):
-        return eval(self.config.utility_function, {'x': x, 'y': y})
+        if not self.config.piecewise_utility:
+            return eval(self.config.utility_function, {'x': x, 'y': y})
+        else:
+            pieces = self.config.utility_function.split(";")
+            
+            for piece in pieces: # iterating through pieces of function
+                # extracting value under current piece and condition
+                value_and_cond = eval(piece, {'x': x, 'y': y})
+                piece_value = value_and_cond[0] 
+                condition_is_met = value_and_cond[1] 
+                
+                if condition_is_met:
+                    return piece_value
+            
     
     def set_payoff(self):
         config = self.config
