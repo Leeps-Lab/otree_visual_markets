@@ -23,15 +23,16 @@ To run this app successfully, you must also include the following apps in your p
 - [`otree_redwood`](https://github.com/Leeps-Lab/otree-redwood)
 - [`otree_markets`](https://github.com/Leeps-Lab/otree_markets)
 
-Make sure these folders are present **at the same level** as `otree_visual_markets`, for example:
+Make sure these folders are present **at the same level** as `otree_visual_markets`. Your directory structure should look like this:
 
+```
 your_project/
 ├── otree_redwood/
 ├── otree_markets/
 ├── otree_visual_markets/
 ├── settings.py
 ├── manage.py
-
+```
 
 
 ## ⚙️ Setup Instructions for Visual Markets (oTree 3.x)
