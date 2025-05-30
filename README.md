@@ -20,7 +20,9 @@ dict(
 These steps help you set up and run the **Visual Markets** app with oTree 3.x.  
 🛑 This version is NOT compatible with oTree Lite (5+).
 
+```
 ---
+
 
 ## 1. Clone the repository
 
