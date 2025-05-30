@@ -14,6 +14,7 @@ dict(
    app_sequence=['otree_visual_markets'],
    session_config_file='demo.txt',
 ),
+```
 
 # ⚙️ Setup Instructions for Visual Markets (oTree 3.x)
 
