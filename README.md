@@ -1,6 +1,6 @@
 # 📈 Visual Markets
 
-This oTree app is designed to visualize continuous double auction markets using heatmaps, utility grids, and other dynamic elements. It is **built for oTree 3.x** and is **not compatible with oTree Lite (oTree 5+)**.
+This oTree app is designed to visualize continuous double auction markets using heatmaps, utility grids, and other dynamic elements. 
 
 ## 🔧 Example Session Config
 
