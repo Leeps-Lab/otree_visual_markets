@@ -35,6 +35,7 @@ cd otree_visual_markets
 ### 2. Create and activate a virtual environment
 
 ```bash
+pyenv local 3.7.17
 python3 -m venv venv
 source venv/bin/activate
 ```
@@ -50,7 +51,7 @@ pip install -r requirements.txt
 Or install manually:
 
 ```bash
-pip install "otree<5" psycopg2 PyYAML js2py numpy
+pip install numpy pandas js2py pyyaml channels otree-redwood otree-core
 ```
 
 ### 4. Run the development server
