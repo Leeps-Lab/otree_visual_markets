@@ -24,13 +24,13 @@ trade_box_scale: 0.25
 
 
 piecewise_utility: true
-utility_function: "y < 24.5 ? 0.45397344 + 0.00287666 * (x + 24.5 * y - 0.05 * y*y) : 0.45397344 + 0.00287666 * (x + 0.95 * 24.5 * 24.5)"
+utility_function: "y < 24.5 ? -0.04481481 + 0.05925926 * (x + 2.45 * y - 0.05 * y * y) : -0.04481481 + 0.05925926 * (x + 2.45*24.5 - 0.05 * 24.5 * 24.5)"
 max_utility: 4
 
 # the length of the round in seconds
 period_length: 180
 # the amount the page should wait after the period ends in seconds
-post_round_delay: 25
+post_round_delay: 40
 
 # whether to draw the heatmap
 heatmap_enabled: true
@@ -86,7 +86,7 @@ role_params:
     x_endowment: 0
     y_endowment: 24
     piecewise_utility: true
-    utility_function: "x < 9.5 ? -0.3888889 + 0.03703704 * (y + 9.5 * x - 0.5 * x*x) : -0.3888889 + 0.03703704 * (y + 0.5 * 9.5 * 9.5)"
+    utility_function: "x < 9.5 ? -0.3888889 + 0.03703704 * (y + 9.5 * x - 0.5 * x * x) : -0.3888889 + 0.03703704 * (y + 0.5 * 9.5 * 9.5)"
   seller:
     x_endowment: 16
     y_endowment: 0

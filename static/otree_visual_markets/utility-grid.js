@@ -14,11 +14,11 @@ class UtilityGrid extends PolymerElement {
             staticGridEnabled: Boolean,
             numRows: {
                 type: Number,
-                value: 11,
+                value: 16,
             },
             numCols: {
                 type: Number,
-                value: 11,
+                value: 16,
             },
         };
     }
@@ -28,6 +28,7 @@ class UtilityGrid extends PolymerElement {
             <style>
                 .container {
                     display: flex;
+                    font-size: 150%;
                 }
                 .col {
                     display: flex;
@@ -146,7 +147,7 @@ class UtilityGrid extends PolymerElement {
         // return a string with the utility value for x and y, with a maximum of 2 decimal points
 
         return this.utilityFunction(x, y)
-            .toFixed(1)
+            .toFixed(2)
             .replace(/\.?0+$/, '')
     }
 
