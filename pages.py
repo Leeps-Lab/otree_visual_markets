@@ -3,6 +3,12 @@ from otree_markets.pages import BaseMarketPage
 from .models import Constants
 
 class Market(BaseMarketPage):
+    # form_model = 'player'
+    # form_fields = ['guess1', 'check_slider_one']
+    #
+    # def error_message(self, values):
+    #     if values['check_slider_one'] == None:
+    #         return 'Please use the slider to make a decision.'
 
     def is_displayed(self):
         return self.round_number <= self.subsession.config.num_rounds
@@ -39,5 +45,6 @@ class Results(Page):
         return {
             'total_unscaled_payoff': float(self.player.participant.payoff) / 1000
         }
+
 
 page_sequence = [Market, PracticeRoundPauseScreen, PostRoundWaitPage, Results]

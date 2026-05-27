@@ -8,8 +8,6 @@ Text_025exp.yaml
 Text_025exp.yaml
 Text_025exp.yaml
 Text_025exp.yaml
-Text_025exp.yaml
-Text_minus05_1exp.yaml
 Text_minus05_1exp.yaml
 Text_minus05_1exp.yaml
 Text_minus05_1exp.yaml

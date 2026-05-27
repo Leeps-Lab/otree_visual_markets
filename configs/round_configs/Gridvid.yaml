@@ -10,35 +10,35 @@ x_endowment: 20
 # scaling for x asset
 x_currency_scale: 100
 # heatmap bounds for x asset
-x_bounds: [0, 24]
+x_bounds: [0, 90]
 
 # starting y (cash) endowment for each player
 y_endowment: 20
 # scaling for y asset
 y_currency_scale: 10000
 # heatmap bounds for y asset
-y_bounds: [0, 40]
+y_bounds: [0, 300]
 
 
 trade_box_scale: 0.25
 
 
 piecewise_utility: true
-utility_function: "y < 24.5 ? -0.04481481 + 0.05925926 * (x + 2.45 * y - 0.05 * y * y) : -0.04481481 + 0.05925926 * (x + 2.45*24.5 - 0.05 * 24.5 * 24.5)"
+utility_function: "0.132 + 0.0063 * Math.pow(Math.pow(0.843*x,0.25) + Math.pow(0.157*y,0.25),4)"
 max_utility: 4
 
 # the length of the round in seconds
-period_length: 210
+period_length: 900
 # the amount the page should wait after the period ends in seconds
-post_round_delay: 40
+post_round_delay: 30
 
 # whether to draw the heatmap
-heatmap_enabled: true
-static_grid_enabled: false
+heatmap_enabled: false
+static_grid_enabled: true
 
 # utility grid x and y bounds. These will be the bounds if the heatmap_enabled is false
-x_bounds_grid: [0,3]
-y_bounds_grid: [0,3]
+x_bounds_grid: [0,5]
+y_bounds_grid: [0,5]
 
 
 # this number determines the number of orders to display in the list. if it's 0, then all orders are shown.
@@ -72,21 +72,21 @@ is_practice: false
 
 # these two numbers determine how payoffs will be calculated. the utility given by the player's initial endowment will be multiplied by the "initial" multiplier
 # and their gains will be multiplied by the "gain" multiplier
-payoff_gain_multiplier: 1.5
-payoff_initial_multiplier: 0.20
+payoff_gain_multiplier: 1.6
+payoff_initial_multiplier: 0.25
 
 # this field determines how each player will be assigne a role. this array should be the same length as the number
 # of players in a group. players are assigned a role from this array based on their id_in_group
-role_assignments: ["buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller"]
+role_assignments: ["seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller"]
 
 # this field determines role-specific overrides for config params. if a role is specified, any config params specified for it
 # will override the params specified above
 role_params:
   buyer:
-    x_endowment: 0
-    y_endowment: 24
+    x_endowment: 5
+    y_endowment: 280
     piecewise_utility: true
-    utility_function: "x < 9.5 ? -0.3888889 + 0.03703704 * (y + 9.5 * x - 0.5 * x * x) : -0.3888889 + 0.03703704 * (y + 0.5 * 9.5 * 9.5)"
+    utility_function: "-1.939 + 0.0058 * Math.pow(Math.pow(0.35*x,0.25) + Math.pow(0.65*y,0.25),4)"
   seller:
-    x_endowment: 16
-    y_endowment: 0
+    x_endowment: 60
+    y_endowment: 5

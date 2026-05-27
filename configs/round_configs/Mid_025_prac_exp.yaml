@@ -65,7 +65,7 @@ show_order_book: true
 show_trade_dot: false
 
 
-disable_input_entry: false
+disable_input_entry: true
 
 is_practice: true
 
