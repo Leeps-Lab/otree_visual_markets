@@ -8,8 +8,6 @@ VG_025exp.yaml
 VG_025exp.yaml
 VG_025exp.yaml
 VG_025exp.yaml
-VG_025exp.yaml
-VG_minus05_1exp.yaml
 VG_minus05_1exp.yaml
 VG_minus05_1exp.yaml
 VG_minus05_1exp.yaml

@@ -1,5 +1,5 @@
 {% extends "otree_markets/Page.html" %}
-{% load staticfiles otree %}
+{% load static otree %}
 
 {% block title %}
     Market
@@ -8,7 +8,19 @@
 {% block scripts %}
     <script type="module" src="/static/otree_visual_markets/visual_markets.js"></script>
     <script type="module" src="/static/otree_visual_markets/currency_scaler.js"></script>
-    <script src="{% static 'otree_visual_markets/highcharts.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!--    <script src="{% static 'otree_visual_markets/highcharts.js' %}"></script>-->
+<!--    <script>-->
+<!--        sliderInput.addEventListener('mousedown', function() {-->
+<!--            sliderInput.classList.add('show-thumb'); // Add class to show the thumb-->
+<!--        });-->
+
+<!--        sliderInput.addEventListener('input', function() {-->
+<!--            sliderValue.textContent = this.value;-->
+<!--        });-->
+<!--    </script>-->
+
+
 {% endblock %}
 
 {% block styles %}

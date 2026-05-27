@@ -1,2 +1,0 @@
-VG_inst.yaml
-Mid_inst.yaml

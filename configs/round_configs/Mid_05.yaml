@@ -19,13 +19,18 @@ y_currency_scale: 10000
 # heatmap bounds for y asset
 y_bounds: [0, 30]
 
-utility_function: "0.099*(((0.6875*x)**0.5) + ((0.3125*y)**0.5))**2"
+
+trade_box_scale: 0.25
+
+
+piecewise_utility: true
+utility_function: "0.099 * Math.pow(Math.pow(0.6875*x,0.5) + Math.pow(0.3125*y,0.5),2)"
 max_utility: 4
 
 # the length of the round in seconds
 period_length: 210
 # the amount the page should wait after the period ends in seconds
-post_round_delay: 30
+post_round_delay: 40
 
 # whether to draw the heatmap
 heatmap_enabled: true
@@ -51,19 +56,24 @@ use_partial_equilibrium: false
 
 show_market_on_heatmap: true
 
-show_order_book: false
+# this config field can be used to disable the order book display on the left side of the interface
+# it replaces the bid/ask/trade boxes and their order inputs with a single box that shows the price/quantity of the
+# proposed bid and allows players to enter it as an order
+show_order_book: true
 
-show_trade_dot: true
+
+show_trade_dot: false
+
 
 disable_input_entry: false
 
-is_practice: true
+is_practice: false
 
 
 # these two numbers determine how payoffs will be calculated. the utility given by the player's initial endowment will be multiplied by the "initial" multiplier
 # and their gains will be multiplied by the "gain" multiplier
 payoff_gain_multiplier: 2.50
-payoff_initial_multiplier: 0.20
+payoff_initial_multiplier: 0.25
 
 # this field determines how each player will be assigne a role. this array should be the same length as the number
 # of players in a group. players are assigned a role from this array based on their id_in_group
@@ -75,7 +85,8 @@ role_params:
   buyer:
     x_endowment: 3
     y_endowment: 23
-    utility_function: "0.113*(((0.825*x)**0.5) + ((0.175*y)**0.5))**2"
+    piecewise_utility: true
+    utility_function: "0.113 * Math.pow(Math.pow(0.825*x,0.5) + Math.pow(0.175*y,0.5),2)"
   seller:
     x_endowment: 11
     y_endowment: 3

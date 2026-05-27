@@ -1,5 +1,5 @@
 from otree.api import (
-    models, BaseConstants
+    models, BaseConstants, BasePlayer,
 )
 from otree_markets import models as markets_models
 from otree_markets.exchange.base import Order, OrderStatusEnum
@@ -127,6 +127,10 @@ class Group(markets_models.Group):
         
    
 class Player(markets_models.Player):
+    # guess1 = models.IntegerField()
+    # check_slider_one = models.IntegerField()
+    # guess2 = models.IntegerField()
+    # check_slider_two = models.IntegerField()
 
     current_bid = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, related_name="+")
     current_ask = models.ForeignKey(Order, null=True, on_delete=models.CASCADE, related_name="+")
