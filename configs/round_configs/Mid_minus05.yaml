@@ -24,13 +24,13 @@ trade_box_scale: 0.25
 
 
 piecewise_utility: true
-utility_function: "Math.pow(Math.pow(0.345*x,(-0.5)) + Math.pow(0.655*y,(-0.5)),(-2))"
-max_utility: 12
+utility_function: "0.025 + 0.197 * Math.pow(Math.pow(0.345*x,(-0.5)) + Math.pow(0.655*y,(-0.5)),(-2))"
+max_utility: 4
 
 # the length of the round in seconds
-period_length: 210
+period_length: 180
 # the amount the page should wait after the period ends in seconds
-post_round_delay: 40
+post_round_delay: 30
 
 # whether to draw the heatmap
 heatmap_enabled: true
@@ -72,12 +72,12 @@ is_practice: false
 
 # these two numbers determine how payoffs will be calculated. the utility given by the player's initial endowment will be multiplied by the "initial" multiplier
 # and their gains will be multiplied by the "gain" multiplier
-payoff_gain_multiplier: 2.50
+payoff_gain_multiplier: 1.75
 payoff_initial_multiplier: 0.25
 
 # this field determines how each player will be assigne a role. this array should be the same length as the number
 # of players in a group. players are assigned a role from this array based on their id_in_group
-role_assignments: ["buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller"]
+role_assignments: ["seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller"]
 
 # this field determines role-specific overrides for config params. if a role is specified, any config params specified for it
 # will override the params specified above
@@ -86,7 +86,7 @@ role_params:
     x_endowment: 15
     y_endowment: 230
     piecewise_utility: true
-    utility_function: "Math.pow(Math.pow(0.565*x,(-0.5)) + Math.pow(0.435*y,(-0.5)),(-2))"
+    utility_function: "-0.036 + 0.243 * Math.pow(Math.pow(0.565*x,(-0.5)) + Math.pow(0.435*y,(-0.5)),(-2))"
   seller:
     x_endowment: 110
     y_endowment: 25

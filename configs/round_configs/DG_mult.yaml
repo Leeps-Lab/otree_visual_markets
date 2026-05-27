@@ -72,8 +72,8 @@ is_practice: false
 
 # these two numbers determine how payoffs will be calculated. the utility given by the player's initial endowment will be multiplied by the "initial" multiplier
 # and their gains will be multiplied by the "gain" multiplier
-payoff_gain_multiplier: 1.5
-payoff_initial_multiplier: 0.20
+payoff_gain_multiplier: 2.5
+payoff_initial_multiplier: 0.10
 
 # this field determines how each player will be assigne a role. this array should be the same length as the number
 # of players in a group. players are assigned a role from this array based on their id_in_group

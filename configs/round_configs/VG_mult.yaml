@@ -30,7 +30,7 @@ max_utility: 4
 # the length of the round in seconds
 period_length: 180
 # the amount the page should wait after the period ends in seconds
-post_round_delay: 20
+post_round_delay: 40
 
 # whether to draw the heatmap
 heatmap_enabled: true

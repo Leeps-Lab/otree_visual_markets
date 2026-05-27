@@ -28,7 +28,7 @@ utility_function: "0.3633 * Math.pow(Math.pow(0.9967*x,(-1)) + Math.pow(0.027*y,
 max_utility: 4
 
 # the length of the round in seconds
-period_length: 150
+period_length: 120
 # the amount the page should wait after the period ends in seconds
 post_round_delay: 30
 
@@ -72,12 +72,12 @@ is_practice: false
 
 # these two numbers determine how payoffs will be calculated. the utility given by the player's initial endowment will be multiplied by the "initial" multiplier
 # and their gains will be multiplied by the "gain" multiplier
-payoff_gain_multiplier: 0.70
+payoff_gain_multiplier: 0.75
 payoff_initial_multiplier: 0.50
 
 # this field determines how each player will be assigne a role. this array should be the same length as the number
 # of players in a group. players are assigned a role from this array based on their id_in_group
-role_assignments: ["seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller"]
+role_assignments: ["buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller", "buyer", "seller"]
 
 # this field determines role-specific overrides for config params. if a role is specified, any config params specified for it
 # will override the params specified above

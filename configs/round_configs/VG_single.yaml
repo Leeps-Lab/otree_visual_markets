@@ -28,7 +28,7 @@ utility_function: "0.099 * Math.pow(Math.pow(0.6875*x,0.5) + Math.pow(0.3125*y,0
 max_utility: 4
 
 # the length of the round in seconds
-period_length: 150
+period_length: 180
 # the amount the page should wait after the period ends in seconds
 post_round_delay: 30
 

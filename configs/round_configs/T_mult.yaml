@@ -28,9 +28,9 @@ utility_function: "y < 24.5 ? -0.04481481 + 0.05925926 * (x + 2.45 * y - 0.05 * 
 max_utility: 4
 
 # the length of the round in seconds
-period_length: 180
+period_length: 210
 # the amount the page should wait after the period ends in seconds
-post_round_delay: 20
+post_round_delay: 40
 
 # whether to draw the heatmap
 heatmap_enabled: true
