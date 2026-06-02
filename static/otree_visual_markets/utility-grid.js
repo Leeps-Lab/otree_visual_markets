@@ -49,11 +49,11 @@ class UtilityGrid extends PolymerElement {
                     background-color: lightgreen;
                 }
             </style>
-            
+
             <currency-scaler
                 id="currency_scaler"
             ></currency-scaler>
-        
+
         <template is="dom-if" if= "{{staticGridEnabled}}">
             <div style="text-align:center">
                 <div class="header-top">Static Utility Grid</div>
@@ -114,7 +114,7 @@ class UtilityGrid extends PolymerElement {
             </div>
         </template>
 
-            
+
         `;
     }
 
@@ -176,7 +176,7 @@ class UtilityGrid extends PolymerElement {
     displayBuyUtilityFunction(x, y, currentX, currentY) {
         if (y==0 || x==0){
             return '-';
-        }       
+        }
         const newX = currentX + x;
         const newY = currentY- (this.$.currency_scaler.xToHumanReadable(x) * y);
         const currUtil = this.utilityFunction(currentX, currentY);
